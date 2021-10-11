@@ -22,21 +22,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn_logout = findViewById(R.id.btn_logout);
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //로그아웃 하기
-                mFirebaseAuth.signOut();
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){ //로그인된 유저가 없으면 회원가입창으로 보내기
+            startRegisterActivity();
+        }
 
-                Intent intent = new Intent(MainActivity.this , LoginActivity.class);
-                startActivity(intent);
-                finish();
+        findViewById(R.id.btn_logout).setOnClickListener(onClickListener);
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_logout:    //로그아웃 버튼 클릭시 로그아웃 버튼으로 돌아가기
+                    FirebaseAuth.getInstance().signOut();
+                    startLoginActivity();
+                    break;
             }
+        }
+    };
+    private void startRegisterActivity(){
+        Intent intent =  new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
 
-        });
-        //탈퇴 처리
-        //mFirebaseAuth.getCurrentUser().delete();
+    private void startLoginActivity(){
+        Intent intent =  new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }
 
