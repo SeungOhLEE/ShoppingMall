@@ -29,16 +29,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_logout).setOnClickListener(onClickListener);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.btn_logout:    //로그아웃 버튼 클릭시 로그아웃 버튼으로 돌아가기
-                    FirebaseAuth.getInstance().signOut();
-                    startLoginActivity();
-                    break;
-            }
-        }
+    View.OnClickListener onClickListener = v -> {
+
     };
     private void startRegisterActivity(){
         Intent intent =  new Intent(this, RegisterActivity.class);
