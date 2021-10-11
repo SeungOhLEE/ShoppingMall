@@ -90,16 +90,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private void startToast(String msg) {
+    private void startToast(String msg) {   //토스트 메시지 메소드
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void startRegisterActivity(){
+    private void startRegisterActivity(){   //회원가입 액티비티로 가는 메소드
         Intent intent =  new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
-    private void startMainActivity(){
+    private void startMainActivity(){   //메인액티비티로 가는 메소드
         Intent intent =  new Intent(this, MainActivity.class);
         startActivity(intent);
     }
