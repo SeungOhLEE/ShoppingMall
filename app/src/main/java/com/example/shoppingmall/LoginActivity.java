@@ -66,19 +66,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if(email.length() > 0 && password.length() > 0 ) {
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("로그인에 성공하였습니다.");
-                                startMainActivity(); //로그인 성공시 메인액티비티로 이동
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            startToast("로그인에 성공하였습니다.");
+                            startMainActivity(); //로그인 성공시 메인액티비티로 이동
 
-                            } else {
-                                if (task.getException() != null) {
-                                    startToast(task.getException().toString());
-                                }
+                        } else {
+                            if (task.getException() != null) {
+                                startToast(task.getException().toString());
                             }
                         }
                     });
